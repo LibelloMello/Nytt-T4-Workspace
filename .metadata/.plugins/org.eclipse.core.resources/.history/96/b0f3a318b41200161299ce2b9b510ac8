@@ -1,0 +1,68 @@
+package Controller;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import Exception.T4Exceptions;
+import se.lu.ics.grupp11.Event;
+import se.lu.ics.grupp11.FileServiceSoapProxy;
+import se.lu.ics.grupp11.User;
+import se.lu.ics.grupp11.WebServicePartycipateDBSoapProxy;
+import se.lu.ics.grupp11.ERP.WebServiceERPSoapProxy;
+
+public class Controller {
+	static WebServicePartycipateDBSoapProxy proxy = new WebServicePartycipateDBSoapProxy();
+	static FileServiceSoapProxy fileproxy = new FileServiceSoapProxy();
+	static String fileResponse;
+	static String msg = "";
+	static WebServiceERPSoapProxy ERPproxy = new WebServiceERPSoapProxy();
+
+	public static String readFile(String input) throws T4Exceptions {
+		try {
+			fileResponse = fileproxy.readFile(input);
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		
+		}
+		return fileResponse;
+	}
+
+	public static Event[] getEvents() throws T4Exceptions {
+
+		Event[] eventList = null;
+		try {
+			eventList = proxy.getEvents();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		}
+		return eventList;
+	}
+
+	public static User[] getUsers() throws T4Exceptions {
+
+		User[] userList = null;
+		try {
+			userList = proxy.getUsers();
+			msg = "All the users";
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studioeee";
+			throw new T4Exceptions(msg, e);
+
+		}
+		return userList;
+	}
+	public static String[][] getAllEmployeeRelatives() throws T4Exceptions {
+		String[][] employeeRelativeList = null;
+		try {
+			employeeRelativeList = ERPproxy.getAllEmployeesRelatives();
+		} catch(RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		}
+		
+		
+		return employeeRelativeList;
+	}
+}

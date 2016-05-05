@@ -1,0 +1,24 @@
+package Controller;
+
+import java.rmi.RemoteException;
+
+import se.lu.ics.grupp11.FileServiceSoapProxy;
+import se.lu.ics.grupp11.WebServicePartycipateDBSoapProxy;
+
+public class Controller {
+	static WebServicePartycipateDBSoapProxy proxy = new WebServicePartycipateDBSoapProxy();
+	static FileServiceSoapProxy fileproxy = new FileServiceSoapProxy();
+	static String fileResponse;
+
+	public static String readFile(String input) {
+		try {
+			fileResponse = fileproxy.readFile(input);
+		} catch (RemoteException e)
+
+		{
+			e.printStackTrace();
+
+		}
+		return fileResponse;
+	}
+}

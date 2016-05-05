@@ -1,0 +1,50 @@
+package Controller;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import se.lu.ics.grupp11.Event;
+import se.lu.ics.grupp11.FileServiceSoapProxy;
+import se.lu.ics.grupp11.User;
+import se.lu.ics.grupp11.WebServicePartycipateDBSoapProxy;
+
+public class Controller {
+	static WebServicePartycipateDBSoapProxy proxy = new WebServicePartycipateDBSoapProxy();
+	static FileServiceSoapProxy fileproxy = new FileServiceSoapProxy();
+	static String fileResponse;
+
+	public static String readFile(String input) throws RemoteException {
+		try {
+			fileResponse = fileproxy.readFile(input);
+		} catch (RemoteException e)
+
+		{
+			e.printStackTrace();
+
+		}
+		return fileResponse;
+	}
+	public static Event[] getEvents() throws RemoteException {
+		
+		Event[] eventList = null;
+		try {
+			eventList = proxy.getEvents();
+		} catch (RemoteException e) {
+			System.out.println("Vadfan?");
+			e.printStackTrace();
+		}
+		return eventList;
+	}
+	public static User[] getUsers() throws RemoteException {
+		String msg = "";
+		User[] userList = null;
+		try {
+			userList = proxy.getUsers();
+			msg = "All the users";
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			e.printStackTrace();
+		}
+		return userList;
+	}
+}

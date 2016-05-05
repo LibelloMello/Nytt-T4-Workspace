@@ -1,0 +1,29 @@
+package Exception;
+
+
+
+public class T4Exceptions extends Exception {
+	private static final long serialVersionUID = 1L;
+	private Exception inner;
+	
+	public T4Exceptions() {
+		super();
+	}
+	
+	public T4Exceptions(String message) {
+		super(message);
+	}
+	
+	public T4Exceptions(String message, Exception inner) {
+		this(message);
+		this.inner = inner;
+	}
+
+	public Exception getInner() {
+		return inner;
+	}
+
+	public void setInner(Exception inner) {
+		this.inner = inner;
+	}
+}

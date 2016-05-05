@@ -1,0 +1,188 @@
+package Controller;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import Exception.T4Exceptions;
+import se.lu.ics.grupp11.Event;
+import se.lu.ics.grupp11.FileServiceSoapProxy;
+import se.lu.ics.grupp11.User;
+import se.lu.ics.grupp11.WebServicePartycipateDBSoapProxy;
+import se.lu.ics.grupp11.ERP.WebServiceERPSoapProxy;
+
+public class Controller {
+	static WebServicePartycipateDBSoapProxy proxy = new WebServicePartycipateDBSoapProxy();
+	static FileServiceSoapProxy fileproxy = new FileServiceSoapProxy();
+	static String fileResponse;
+	static String msg = "";
+	static WebServiceERPSoapProxy ERPproxy = new WebServiceERPSoapProxy();
+
+	public static String readFile(String input) throws T4Exceptions {
+		try {
+			fileResponse = fileproxy.readFile(input);
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		
+		}
+		return fileResponse;
+	}
+
+	public static Event[] getEvents() throws T4Exceptions {
+
+		Event[] eventList = null;
+		try {
+			eventList = proxy.getEvents();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		}
+		return eventList;
+	}
+
+	public static User[] getUsers() throws T4Exceptions {
+
+		User[] userList = null;
+		try {
+			userList = proxy.getUsers();
+			msg = "All the users";
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studioeee";
+			throw new T4Exceptions(msg, e);
+
+		}
+		return userList;
+	}
+	public static String[][] getAllEmployeeRelatives() throws T4Exceptions {
+		String[][] employeeRelativeList = null;
+		try {
+			employeeRelativeList = ERPproxy.getAllEmployeesRelatives();
+		} catch(RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+			throw new T4Exceptions(msg, e);
+		}
+		
+		
+		return employeeRelativeList;
+	}
+	public static String[][] getAllSickEmployees2004() {
+		String[][] sickEmployees2004 = null;
+		try {
+			sickEmployees2004 = ERPproxy.getAllSickEmployees2004();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return sickEmployees2004;
+	}
+	public static String[][] getAllEmployees() {
+		String[][] allEmployees = null;
+		try {
+			allEmployees = ERPproxy.getAllEmployees();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return allEmployees;
+	}
+	public static String[] getColumnsNames(String[][] array) throws T4Exceptions {
+		String[] columnNames = null;
+		for (int j = 0; j < array[0].length; j++) {
+//		    columnNames = array[0][]; 
+
+		}
+		
+		return columnNames;
+	}
+	public static void addEmployee(String id, String name) {
+		try {
+			ERPproxy.addEmployee(id, name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+	public static void deleteEmployee(String id) {
+		try {
+			ERPproxy.deleteEmployee(id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+	}
+	public static String[][] getAllEmployeesRelatives() {
+		
+		String[][] allEmployeesRelatives = null;
+		try {
+			allEmployeesRelatives = ERPproxy.getAllEmployeesRelatives();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return allEmployeesRelatives;
+		
+	}
+	
+	public static String[][] getEmployeeWithMostAbsence() {
+		String[][] sickestEmployees = null;
+		try {
+			sickestEmployees = ERPproxy.getEmployeeWithMostAbsence();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return sickestEmployees;
+	}
+	public static String[][] getAllIndexes() {
+		String[][] indexes = null;
+		try {
+			indexes = ERPproxy.getCronusIndexes();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return indexes;
+	}
+	public static String[][] getAllConstraints() {
+		String[][] constraints = null;
+		try {
+			constraints = ERPproxy.getCronusTableConstraints();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return constraints;
+	}
+	public static String[][] getColumns() {
+		String[][] columns = null;
+		try {
+			columns = ERPproxy.getCronusTableConstraints();
+		} catch (RemoteException e) {
+			msg = "Unable to connect, please try to connect webservices from Visual Studio";
+//			throw new T4Exceptions(msg, e);
+		}
+		return columns;
+	}
+//	public static String[][] get
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

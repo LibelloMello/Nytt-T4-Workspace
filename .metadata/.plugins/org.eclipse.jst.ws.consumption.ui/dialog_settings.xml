@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.jst.ws.client.type.java">
+		<item value="http://localhost:20341/WebServiceERP.asmx?wsdl"/>
+		<item value="http://localhost:21970/WebServicePartycipateDB.asmx?wsdl"/>
+		<item value="http://localhost:15285/FileService.asmx?wsdl"/>
+	</list>
+</section>
